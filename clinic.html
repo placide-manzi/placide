@@ -1,0 +1,1516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kira Clinic - Quality Healthcare Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #2c5037;
+            --secondary-color: #20C997;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --text-light: #7f8c8d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 15px;
+        }
+
+        h1, h2, h3, h4 {
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--secondary-color);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--secondary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #19A47A;
+            transform: translateY(-2px);
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 15px;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            color: white;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        nav ul {
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        nav ul li a {
+            color: white;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Hero Section with Slideshow */
+        .hero {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            margin-top: 60px;
+        }
+
+        .slideshow-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slide::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .hero-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 10;
+            width: 100%;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .hero-buttons {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        .btn-white:hover {
+            background: #f1f1f1;
+        }
+
+        .slideshow-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 10;
+        }
+
+        .slideshow-nav button {
+            background: rgba(255, 255, 255, 0.7);
+            border: none;
+            color: var(--primary-color);
+            font-size: 18px;
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .slideshow-nav button:hover {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .slideshow-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active,
+        .dot:hover {
+            background: white;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 5rem 0;
+            background-color: var(--light-color);
+        }
+
+        .services h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            overflow: hidden;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .service-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .service-img {
+            height: 200px;
+            margin-bottom: 1.5rem;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .service-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* More Services Section */
+        .more-services {
+            padding: 4rem 0;
+        }
+
+        .more-services h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+        }
+
+        .services-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .services-list h3 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .services-list ul li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .services-list ul li:before {
+            content: "•";
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+        }
+
+        /* Doctors Section */
+        .doctors {
+            padding: 5rem 0;
+            background-color: white;
+        }
+
+        .doctors h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+        }
+
+        .doctors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .doctor-card {
+            background: var(--light-color);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .doctor-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .doctor-img {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .doctor-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .doctor-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .doctor-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .doctor-position {
+            color: var(--secondary-color);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        /* Section visibility control */
+        .section-hidden {
+            display: none;
+        }
+
+        /* About Section */
+        .about {
+            padding: 5rem 0;
+            background-color: var(--light-color);
+        }
+
+        .about h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .about-text h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            margin-top: 2rem;
+        }
+
+        .about-text h3:first-child {
+            margin-top: 0;
+        }
+
+        .values-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .values-list li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .values-list li:before {
+            content: "✓";
+            color: var(--secondary-color);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-card h4 {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .facility-info {
+            margin-top: 3rem;
+        }
+
+        .facility-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .facility-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature i {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .feature h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Partnership Section */
+        .partnerships {
+            padding: 5rem 0;
+            background-color: white;
+        }
+
+        .partnerships h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+        }
+
+        .partnership-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .partnership-info {
+            background: var(--light-color);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .partnership-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .partnership-img {
+            height: 200px;
+            margin-bottom: 1.5rem;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .partnership-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .partner-logos {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .partner-logo {
+            background: white;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+            font-weight: 500;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 0;
+            background-color: var(--light-color);
+        }
+
+        .contact h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .contact-info {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-info div {
+            margin-bottom: 2rem;
+        }
+
+        .contact-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-info h3 i {
+            margin-right: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-form h3 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 3rem 0 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-col h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-col p, .footer-col a {
+            color: var(--light-color);
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+
+        .footer-col a:hover {
+            color: var(--accent-color);
+        }
+
+        .social-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+        }
+
+        .social-links i {
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding: 1.5rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            nav ul li {
+                margin: 0;
+            }
+
+            .hero {
+                height: 70vh;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .about-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .facility-features {
+                grid-template-columns: 1fr;
+            }
+
+            .slideshow-nav {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 1rem 10px;
+            }
+
+            .hero h2 {
+                font-size: 1.5rem;
+            }
+
+            .services-grid,
+            .doctors-grid,
+            .partnership-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .partner-logos {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="https://t3.ftcdn.net/jpg/05/14/36/48/360_F_514364850_xLOQX6SOY2qcjAIcTowsi3xYvHmhmvs0.jpg" alt="">
+                <h1>Kira Clinic</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home" class="nav-link">Home</a></li>
+                    <li><a href="#services" class="nav-link">Services</a></li>
+                    <li><a href="#doctors" class="nav-link">Doctors</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#partnerships" class="nav-link">Partnership</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Home Section with Slideshow -->
+    <section id="home" class="hero">
+        <div class="slideshow-container">
+            <div class="slide active">
+                <img src="https://t4.ftcdn.net/jpg/02/65/95/81/360_F_265958166_YTEL6wHpfxnPlN9nNYxL7UKHiOWCln59.jpg" alt="Medical facility">
+            </div>
+            <div class="slide">
+                <img src="https://media.istockphoto.com/id/1346675635/photo/modern-medical-research-laboratory-portrait-of-latin-and-black-young-scientists-using.jpg?s=612x612&w=0&k=20&c=9PiRizOrO04C6TSyMhqv7NUDabjhbrrnL3LVLuArGJU=" alt="Healthcare professionals">
+            </div>
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1551601651-2a8555f1a136?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080" alt="Modern medical equipment">
+            </div>
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080" alt="Patient care">
+            </div>
+        </div>
+        <div class="hero-content">
+            <div class="container">
+                <h2>Welcome to Kira Clinic</h2>
+                <p>Your health is our priority. We provide comprehensive healthcare services with a team of experienced medical professionals dedicated to your well-being.</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn nav-link">Book Appointment</a>
+                    <a href="#services" class="btn btn-white nav-link">Our Services</a>
+                </div>
+            </div>
+        </div>
+        <div class="slideshow-nav">
+            <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+            <button class="next" onclick="changeSlide(1)">&#10095;</button>
+        </div>
+        <div class="slideshow-dots">
+            <span class="dot active" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=300" alt="General Medicine">
+                    </div>
+                    <h3>General Medicine</h3>
+                    <p>Comprehensive primary care services for all your health needs. Our experienced physicians provide preventive care, diagnosis, and treatment for a wide range of conditions.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=300" alt="Cardiology">
+                    </div>
+                    <h3>Cardiology</h3>
+                    <p>Expert cardiac care including heart disease prevention, diagnosis, and treatment. Our cardiologists use the latest technology to ensure optimal heart health.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1582560469781-1965b9af903d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=300" alt="Pediatrics">
+                    </div>
+                    <h3>Pediatrics</h3>
+                    <p>Specialized healthcare for children from birth to adolescence. We provide comprehensive pediatric care in a comfortable, child-friendly environment.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1584467735815-f778f274e296?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=300" alt="Dermatology">
+                    </div>
+                    <h3>Dermatology</h3>
+                    <p>Complete skin care services including diagnosis and treatment of skin conditions, cosmetic procedures, and preventive skin care.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://media.istockphoto.com/id/493302504/photo/testing-substances.jpg?s=612x612&w=0&k=20&c=zxRr8On95eALl__Ff06rasZZt6oOud8gGH0_8GFRTH8=" alt="Laboratory Services">
+                    </div>
+                    <h3>Laboratory Services</h3>
+                    <p>State-of-the-art diagnostic laboratory with comprehensive testing capabilities. Quick and accurate results for better healthcare decisions.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1551601651-2a8555f1a136?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=300" alt="Emergency Care">
+                    </div>
+                    <h3>Emergency Care</h3>
+                    <p>24/7 emergency medical services with experienced emergency physicians and modern equipment to handle urgent medical situations.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Services -->
+        <div class="container">
+            <div class="more-services">
+                <h2>Additional Services</h2>
+                <div class="services-list">
+                    <div>
+                        <h3>Specialist Services</h3>
+                        <ul>
+                            <li>Orthopedics</li>
+                            <li>Gynecology</li>
+                            <li>Neurology</li>
+                            <li>Ophthalmology</li>
+                            <li>ENT (Ear, Nose, Throat)</li>
+                            <li>Urology</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Diagnostic Services</h3>
+                        <ul>
+                            <li>X-Ray Imaging</li>
+                            <li>Ultrasound</li>
+                            <li>ECG/EKG</li>
+                            <li>Blood Tests</li>
+                            <li>Urine Analysis</li>
+                            <li>Health Screenings</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Wellness Programs</h3>
+                        <ul>
+                            <li>Preventive Health Checkups</li>
+                            <li>Vaccination Services</li>
+                            <li>Health Education</li>
+                            <li>Nutrition Counseling</li>
+                            <li>Chronic Disease Management</li>
+                            <li>Health Monitoring</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Support Services</h3>
+                        <ul>
+                            <li>Pharmacy</li>
+                            <li>Physical Therapy</li>
+                            <li>Medical Records</li>
+                            <li>Insurance Assistance</li>
+                            <li>Patient Education</li>
+                            <li>Telemedicine</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Doctors Section -->
+    <section id="doctors" class="doctors">
+        <div class="container">
+            <h2>Our Medical Team</h2>
+            <div class="doctors-grid">
+                <div class="doctor-card">
+                    <div class="doctor-img">
+                        <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400" alt="Dr. Sarah Johnson">
+                    </div>
+                    <div class="doctor-info">
+                        <h3>Dr. Sarah Johnson</h3>
+                        <div class="doctor-position">Chief Medical Officer</div>
+                        <p>Specializing in Internal Medicine with over 15 years of experience in patient care and medical administration.</p>
+                    </div>
+                </div>
+                <div class="doctor-card">
+                    <div class="doctor-img">
+                        <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400" alt="Dr. Michael Chen">
+                    </div>
+                    <div class="doctor-info">
+                        <h3>Dr. Michael Chen</h3>
+                        <div class="doctor-position">Cardiologist</div>
+                        <p>Board-certified cardiologist with expertise in interventional cardiology and heart disease prevention.</p>
+                    </div>
+                </div>
+                <div class="doctor-card">
+                    <div class="doctor-img">
+                        <img src="https://img.freepik.com/free-photo/medium-shot-smiley-doctor-with-coat_23-2148814212.jpg?semt=ais_hybrid&w=740" alt="Dr. Emily Rodriguez">
+                    </div>
+                    <div class="doctor-info">
+                        <h3>Dr. Emily Rodriguez</h3>
+                        <div class="doctor-position">Pediatrician</div>
+                        <p>Dedicated pediatrician providing comprehensive care for children and adolescents with a gentle, caring approach.</p>
+                    </div>
+                </div>
+                <div class="doctor-card">
+                    <div class="doctor-img">
+                        <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400" alt="Dr. David Thompson">
+                    </div>
+                    <div class="doctor-info">
+                        <h3>Dr. David Thompson</h3>
+                        <div class="doctor-position">Emergency Medicine</div>
+                        <p>Emergency medicine specialist with extensive experience in trauma care and critical patient management.</p>
+                    </div>
+                </div>
+                <div class="doctor-card">
+                    <div class="doctor-img">
+                        <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400" alt="Dr. Lisa Wang">
+                    </div>
+                    <div class="doctor-info">
+                        <h3>Dr. Lisa Wang</h3>
+                        <div class="doctor-position">Dermatologist</div>
+                        <p>Expert dermatologist specializing in medical and cosmetic dermatology with focus on skin health and wellness.</p>
+                    </div>
+                </div>
+                <div class="doctor-card">
+                    <div class="doctor-img">
+                        <img src="https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400" alt="Dr. James Wilson">
+                    </div>
+                    <div class="doctor-info">
+                        <h3>Dr. James Wilson</h3>
+                        <div class="doctor-position">Orthopedic Surgeon</div>
+                        <p>Skilled orthopedic surgeon with expertise in joint replacement, sports medicine, and trauma surgery.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section (Hidden by default, shown when clicked) -->
+    <section id="about" class="about section-hidden">
+        <div class="container">
+            <h2>About Our Clinic</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Our Mission</h3>
+                    <p>At Kira Clinic, we are committed to providing exceptional healthcare services that prioritize patient well-being and satisfaction. Our mission is to deliver comprehensive, compassionate, and accessible medical care to our community while maintaining the highest standards of medical excellence.</p>
+                    
+                    <h3>Our Vision</h3>
+                    <p>To be the leading healthcare provider in our region, recognized for our innovative approach to medicine, exceptional patient care, and commitment to improving the health and quality of life for all our patients.</p>
+                    
+                    <h3>Our Values</h3>
+                    <ul class="values-list">
+                        <li><strong>Compassion:</strong> We treat every patient with empathy, respect, and understanding.</li>
+                        <li><strong>Excellence:</strong> We strive for the highest quality in all aspects of our medical care.</li>
+                        <li><strong>Integrity:</strong> We maintain honesty and transparency in all our interactions.</li>
+                        <li><strong>Innovation:</strong> We embrace new technologies and methods to improve patient care.</li>
+                        <li><strong>Collaboration:</strong> We work together as a team to provide the best possible outcomes.</li>
+                    </ul>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-card">
+                        <h4>15+</h4>
+                        <p>Years of Service</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>50,000+</h4>
+                        <p>Patients Served</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>25+</h4>
+                        <p>Medical Specialists</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>24/7</h4>
+                        <p>Emergency Care</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="facility-info">
+                <h3>Our Facility</h3>
+                <p>Kira Clinic is equipped with state-of-the-art medical technology and modern facilities designed to provide a comfortable and healing environment for our patients. Our clinic features:</p>
+                <div class="facility-features">
+                    <div class="feature">
+                        <i class="fas fa-hospital"></i>
+                        <h4>Modern Infrastructure</h4>
+                        <p>Contemporary medical facility with advanced equipment and comfortable patient areas.</p>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-microscope"></i>
+                        <h4>Advanced Laboratory</h4>
+                        <p>Comprehensive diagnostic services with cutting-edge technology for accurate results.</p>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-ambulance"></i>
+                        <h4>Emergency Services</h4>
+                        <p>24/7 emergency care with rapid response capabilities and specialized equipment.</p>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-user-md"></i>
+                        <h4>Expert Staff</h4>
+                        <p>Highly qualified medical professionals committed to providing exceptional patient care.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partnership Section (Hidden by default, shown when clicked) -->
+    <section id="partnerships" class="partnerships section-hidden">
+        <div class="container">
+            <h2>Our Partnerships</h2>
+            <div class="partnership-grid">
+                <div class="partnership-info">
+                    <div class="partnership-img">
+                        <img src="https://media.istockphoto.com/id/514105541/vector/healthcare-connection-concept.jpg?s=612x612&w=0&k=20&c=Axg640Vvkr0qz4fJod07MctWX6UESOevKpUQgQreQyU=" alt="Medical Partnership">
+                    </div>
+                    <h3>Healthcare Networks</h3>
+                    <p>We collaborate with leading healthcare networks to ensure our patients have access to specialized care and advanced medical treatments. Our partnerships enable us to provide comprehensive healthcare services that meet the diverse needs of our community.</p>
+                    <div class="partner-logos">
+                        <div class="partner-logo">Regional Medical Center</div>
+                        <div class="partner-logo">City Hospital Network</div>
+                        <div class="partner-logo">Specialty Care Associates</div>
+                    </div>
+                </div>
+                <div class="partnership-info">
+                    <div class="partnership-img">
+                        <img src="https://media.istockphoto.com/id/1470986827/photo/businessman-using-laptop-with-ai-tech-auto-insurance-service-concept-travel-insurance-data.jpg?s=612x612&w=0&k=20&c=AKBV608awZR1hULillcxPSbgSF2S_J7kl4bFp9GO3nM=" alt="Insurance Partnership">
+                    </div>
+                    <h3>Insurance Providers</h3>
+                    <p>We work with major insurance providers to make healthcare accessible and affordable for our patients. Our partnerships ensure that quality medical care is within reach for individuals and families across different insurance plans.</p>
+                    <div class="partner-logos">
+                        <div class="partner-logo">HealthFirst Insurance</div>
+                        <div class="partner-logo">MediCare Plus</div>
+                        <div class="partner-logo">Family Health Plans</div>
+                    </div>
+                </div>
+                <div class="partnership-info">
+                    <div class="partnership-img">
+                        <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&h=300" alt="Research Partnership">
+                    </div>
+                    <h3>Research Institutions</h3>
+                    <p>Our collaboration with renowned research institutions allows us to stay at the forefront of medical advancements and offer our patients access to cutting-edge treatments and clinical trials.</p>
+                    <div class="partner-logos">
+                        <div class="partner-logo">Medical Research Institute</div>
+                        <div class="partner-logo">Clinical Trials Center</div>
+                        <div class="partner-logo">Health Innovation Lab</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div>
+                        <h3><i class="fas fa-map-marker-alt"></i> Address</h3>
+                        <p>123 Health Street<br>Medical District<br>City, State 12345</p>
+                    </div>
+                    <div>
+                        <h3><i class="fas fa-phone"></i> Phone</h3>
+                        <p>Emergency: (144) 911-HELP<br>Appointments: (250) 795023249<br>General Info: (250) 795023249 </p>
+                    </div>
+                    <div>
+                        <h3><i class="fas fa-envelope"></i> Email</h3>
+                        <p>info@kiraclinic.com<br>appointments@kiraclinic.com<br>emergency@kiraclinic.com</p>
+                    </div>
+                    <div>
+                        <h3><i class="fas fa-clock"></i> Hours</h3>
+                        <p>Monday - Friday: 7:00 AM - 8:00 PM<br>Saturday: 8:00 AM - 6:00 PM<br>Sunday: 9:00 AM - 5:00 PM<br>Emergency: 24/7</p>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Send us a Message</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject *</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" required placeholder="Please describe your inquiry or health concern..."></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Kira Clinic</h3>
+                    <p>Providing quality healthcare services with compassion and excellence. Your health and well-being are our top priorities.</p>
+                    <p>Licensed Healthcare Provider<br>Accredited Medical Facility<br>Insurance Accepted</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <a href="#home">Home</a>
+                    <a href="#services">Services</a>
+                    <a href="#doctors">Our Doctors</a>
+                    <a href="#about">About Us</a>
+                    <a href="#contact">Contact</a>
+                    <a href="#partnerships">Partnerships</a>
+                </div>
+                <div class="footer-col">
+                    <h3>Services</h3>
+                    <a href="#services">General Medicine</a>
+                    <a href="#services">Emergency Care</a>
+                    <a href="#services">Specialist Services</a>
+                    <a href="#services">Laboratory</a>
+                    <a href="#services">Preventive Care</a>
+                    <a href="#services">Telemedicine</a>
+                </div>
+                <div class="footer-col">
+                    <h3>Follow Us</h3>
+                    <ul class="social-links">
+                        <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                        <li><a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                        <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <div class="container">
+                <p>&copy; 2024 Kira Clinic. All rights reserved. | Privacy Policy | Terms of Service | Patient Rights</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Slideshow functionality
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+
+        function showSlide(index) {
+            // Hide all slides
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            // Show current slide
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+        }
+
+        function nextSlide() {
+            currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+            showSlide(currentSlideIndex);
+        }
+
+        function prevSlide() {
+            currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
+            showSlide(currentSlideIndex);
+        }
+
+        function changeSlide(direction) {
+            if (direction === 1) {
+                nextSlide();
+            } else {
+                prevSlide();
+            }
+        }
+
+        function currentSlide(index) {
+            currentSlideIndex = index - 1;
+            showSlide(currentSlideIndex);
+        }
+
+        // Auto-advance slideshow
+        function startSlideshow() {
+            setInterval(nextSlide, 5000); // Change slide every 5 seconds
+        }
+
+        // Smooth scrolling navigation with section visibility control
+        function initNavigation() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    
+                    if (targetSection) {
+                        // Show hidden sections when clicked
+                        if (targetSection.classList.contains('section-hidden')) {
+                            targetSection.classList.remove('section-hidden');
+                        }
+                        
+                        targetSection.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Contact form handling
+        function initContactForm() {
+            const contactForm = document.getElementById('contactForm');
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get form data
+                    const formData = new FormData(this);
+                    const data = {};
+                    
+                    for (let [key, value] of formData.entries()) {
+                        data[key] = value;
+                    }
+                    
+                    // Simple form validation
+                    if (!data.name || !data.email || !data.subject || !data.message) {
+                        alert('Please fill in all required fields.');
+                        return;
+                    }
+                    
+                    // Email validation
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(data.email)) {
+                        alert('Please enter a valid email address.');
+                        return;
+                    }
+                    
+                    // Show success message (in a real app, you would send this to a server)
+                    alert('Thank you for your message! We will get back to you soon.');
+                    
+                    // Reset form
+                    this.reset();
+                });
+            }
+        }
+
+        // Active navigation highlighting
+        function initActiveNavigation() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            function updateActiveNav() {
+                let currentSection = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 100;
+                    const sectionHeight = section.offsetHeight;
+                    
+                    if (window.pageYOffset >= sectionTop && 
+                        window.pageYOffset < sectionTop + sectionHeight) {
+                        currentSection = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${currentSection}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', updateActiveNav);
+            updateActiveNav(); // Initial call
+        }
+
+        // Intersection Observer for animations
+        function initAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe elements for animation
+            const animatedElements = document.querySelectorAll('.service-card, .doctor-card, .partnership-info, .stat-card, .feature');
+            
+            animatedElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+        }
+
+        // Mobile menu toggle (if needed for responsive design)
+        function initMobileMenu() {
+            const header = document.querySelector('header');
+            const nav = document.querySelector('nav');
+            
+            // Add mobile menu button if screen is small
+            function checkMobileMenu() {
+                if (window.innerWidth <= 768) {
+                    if (!document.querySelector('.mobile-menu-toggle')) {
+                        const mobileToggle = document.createElement('button');
+                        mobileToggle.className = 'mobile-menu-toggle';
+                        mobileToggle.innerHTML = '☰';
+                        mobileToggle.style.cssText = `
+                            background: none;
+                            border: none;
+                            color: white;
+                            font-size: 1.5rem;
+                            cursor: pointer;
+                            display: block;
+                        `;
+                        
+                        mobileToggle.addEventListener('click', () => {
+                            nav.style.display = nav.style.display === 'none' ? 'block' : 'none';
+                        });
+                        
+                        header.querySelector('.container').appendChild(mobileToggle);
+                    }
+                } else {
+                    const mobileToggle = document.querySelector('.mobile-menu-toggle');
+                    if (mobileToggle) {
+                        mobileToggle.remove();
+                        nav.style.display = 'block';
+                    }
+                }
+            }
+            
+            window.addEventListener('resize', checkMobileMenu);
+            checkMobileMenu();
+        }
+
+        // Initialize all functionality when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Start slideshow
+            startSlideshow();
+            
+            // Initialize navigation
+            initNavigation();
+            
+            // Initialize contact form
+            initContactForm();
+            
+            // Initialize active navigation highlighting
+            initActiveNavigation();
+            
+            // Initialize animations
+            initAnimations();
+            
+            // Initialize mobile menu
+            initMobileMenu();
+            
+            // Add smooth scrolling offset for fixed header
+            const style = document.createElement('style');
+            style.textContent = `
+                section {
+                    scroll-margin-top: 80px;
+                }
+            `;
+            document.head.appendChild(style);
+        });
+
+        // Handle window resize for slideshow
+        window.addEventListener('resize', function() {
+            // Recalculate slideshow dimensions if needed
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach(slide => {
+                slide.style.height = '100vh';
+            });
+        });
+
+        // Keyboard navigation for slideshow
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') {
+                prevSlide();
+            } else if (e.key === 'ArrowRight') {
+                nextSlide();
+            }
+        });
+
+        // Touch/swipe support for mobile slideshow
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    nextSlide(); // Swipe left - next slide
+                } else {
+                    prevSlide(); // Swipe right - previous slide
+                }
+            }
+        }
+    </script>
+</body>
+</html>
